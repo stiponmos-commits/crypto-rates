@@ -1,0 +1,14 @@
+name: rates
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -m pip install requests
+      - run: python rates.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
